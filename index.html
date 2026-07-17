@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi activité PHAD-IT - GBAL</title>
+    <!-- Tailwind CSS CDN for modern and clean styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <!-- PAGE 1: ACCUEIL & METADATA -->
+    <section id="page-accueil" class="min-h-screen flex flex-col justify-between p-8 md:p-16 max-w-5xl mx-auto w-full">
+        <div class="my-auto space-y-12">
+            <!-- Header Title -->
+            <div class="space-y-4">
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-none">
+                    Suivi activités <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">PHAD-IT GBAL</span>
+                </h1>
+            </div>
+
+            <!-- Key Info Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Taux Card -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
+                            <i class="fa-solid fa-chart-pie text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900">Taux d'activité PHAD-IT</h3>
+                    </div>
+                    <div class="text-4xl font-black text-indigo-600">50%</div>
+                </div>
+
+                <!-- GT-SIC Card -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="p-3 bg-violet-50 text-violet-600 rounded-xl">
+                            <i class="fa-solid fa-clock-rotate-left text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900">GT-SIC-Pharma & Colloques PHAClin</h3>
+                    </div>
+                    <div class="text-xl font-bold text-slate-800">env. 6h / mois</div>
+                    <p class="text-sm text-slate-500 mt-2">Pris sur le temps d'activité IT.</p>
+                </div>
+            </div>
+
+            <!-- Cross-over Activities -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center">
+                    <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-3"></span>
+                    Activités « cross-over » avec CDC PHAClin
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-start p-4 bg-slate-50 rounded-xl hover:bg-indigo-50/50 transition-colors">
+                        <div class="text-indigo-600 mt-0.5 mr-3">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-950">Prescriptions Soarian</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">Suivi des intégrations et paramétrages cliniques.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-slate-50 rounded-xl hover:bg-violet-50/50 transition-colors">
+                        <div class="text-violet-600 mt-0.5 mr-3">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-950">DEV Refmed</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">Développement et maintenance du référentiel médical.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Button to Page 2 -->
+        <div class="pt-8 text-center">
+            <a href="#page-timeline" class="inline-flex items-center space-x-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-full shadow-lg shadow-indigo-100 hover:shadow-indigo-200 transition-all cursor-pointer">
+                <span>Accéder à la Timeline & Projets</span>
+                <i class="fa-solid fa-arrow-down animate-bounce"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- PAGE 2: TIMELINE & DETAILS -->
+    <section id="page-timeline" class="min-h-screen p-8 md:p-16 max-w-7xl mx-auto w-full border-t border-slate-100">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+            <div class="space-y-2">
+                <h2 class="text-3xl font-extrabold text-slate-950">Timeline des Projets</h2>
+                <p class="text-sm text-slate-500">Cliquez sur un projet pour afficher son historique et ses détails annuels.</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex space-x-3 text-xs">
+                <span class="flex items-center"><span class="w-3 h-3 bg-emerald-500 rounded-full mr-1.5"></span>Terminé</span>
+                <span class="flex items-center"><span class="w-3 h-3 bg-amber-500 rounded-full mr-1.5"></span>En cours</span>
+            </div>
+        </div>
+
+        <!-- SORTING CONTROLS -->
+        <div class="bg-slate-100/80 backdrop-blur-md p-4 rounded-2xl mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-200/50">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-filter text-indigo-600"></i>
+                <span class="font-semibold text-sm text-slate-700">Trier l'affichage :</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="sortProjects('name', this)" class="sort-btn px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-700 hover:bg-indigo-50 border border-slate-200 transition-all flex items-center space-x-1.5 shadow-sm">
+                    <i class="fa-solid fa-arrow-down-a-z"></i>
+                    <span>Nom</span>
+                </button>
+                <button id="default-sort-btn" onclick="sortProjects('start', this)" class="sort-btn px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 border border-indigo-600 transition-all flex items-center space-x-1.5 shadow-sm">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>Date de début</span>
+                </button>
+                <button onclick="sortProjects('end', this)" class="sort-btn px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-700 hover:bg-indigo-50 border border-slate-200 transition-all flex items-center space-x-1.5 shadow-sm">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Date de fin</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- TIMELINE GANTT-STYLE VISUALIZATION -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 overflow-x-auto mb-12">
+            <div class="min-w-[950px]">
+                <!-- Years Header Bar -->
+                <div class="grid grid-cols-12 border-b border-slate-100 pb-4 text-center font-bold text-[11px] text-slate-400 tracking-wider">
+                    <div class="col-span-4 text-left pl-4">PROJET</div>
+                    <div class="col-span-7 grid grid-cols-4 text-center">
+                        <div class="border-l border-slate-100">2023</div>
+                        <div class="border-l border-slate-100">2024</div>
+                        <div class="border-l border-slate-100">2025</div>
+                        <div class="border-l border-slate-100">2026</div>
+                    </div>
+                    <div class="col-span-1 border-l border-slate-100">STATUT</div>
+                </div>
+
+                <!-- Projects Rows -->
+                <div class="divide-y divide-slate-100" id="projects-container">
+                    
+                    <!-- Project chatbot_ia -->
+                    <div id="project-row-chatbot_ia" onclick="openProjectDetails('chatbot_ia')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="chatbot ia (ggal) chuv-heg genève (phad)"
+                         data-start="2024-03-01"
+                         data-end="2024-12-31"
+                         data-status="Terminé">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">Chatbot IA (GGAL) CHUV-HEG Genève (PHAD)</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500" style="left: 29.1%; width: 20.9%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.03.2024</span>
+                                <span>Fin: 31.12.2024</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">Terminé</span>
+                        </div>
+                    </div>
+    
+                    <!-- Project codes_indication -->
+                    <div id="project-row-codes_indication" onclick="openProjectDetails('codes_indication')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="codes indication - phad"
+                         data-start="2026-04-17"
+                         data-end="9999-12-31"
+                         data-status="En cours">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">Codes Indication - PHAD</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500" style="left: 82.3%; width: 17.7%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 17.04.2026</span>
+                                <span>Fin: En cours</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-amber-50 text-amber-700 border-amber-200">En cours</span>
+                        </div>
+                    </div>
+    
+                    <!-- Project epic_phad -->
+                    <div id="project-row-epic_phad" onclick="openProjectDetails('epic_phad')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="epic - phad"
+                         data-start="2025-11-01"
+                         data-end="9999-12-31"
+                         data-status="En cours">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">EPIC - PHAD</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500" style="left: 70.8%; width: 29.1%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.11.2025</span>
+                                <span>Fin: En cours</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-amber-50 text-amber-700 border-amber-200">En cours</span>
+                        </div>
+                    </div>
+    
+                    <!-- Project integration_tour -->
+                    <div id="project-row-integration_tour" onclick="openProjectDetails('integration_tour')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="intégration hôpital de la tour - refmed"
+                         data-start="2024-07-01"
+                         data-end="2025-01-02"
+                         data-status="Terminé">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">Intégration Hôpital de la Tour - REFMED</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500" style="left: 37.4%; width: 12.7%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.07.2024</span>
+                                <span>Fin: 02.01.2025</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">Terminé</span>
+                        </div>
+                    </div>
+
+                    <!-- Project Refmed_OracleSQLDEV -->
+                    <div id="project-row-refmed_oraclesqldev" onclick="openProjectDetails('refmed_oraclesqldev')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="refmed oracle sql dev"
+                         data-start="2026-02-01"
+                         data-end="2026-04-01"
+                         data-status="Terminé">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">Refmed Oracle SQL DEV</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500" style="left: 77.1%; width: 4.2%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.02.2026</span>
+                                <span>Fin: 01.04.2026</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">Terminé</span>
+                        </div>
+                    </div>
+    
+                    <!-- Project moove_meditron -->
+                    <div id="project-row-moove_meditron" onclick="openProjectDetails('moove_meditron')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="moove-meditron - open source llm - epfl chuv (phad)"
+                         data-start="2024-12-01"
+                         data-end="9999-12-31"
+                         data-status="En cours">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">MOOVE-MEDITRON - open source LLM - EPFL CHUV (PHAD)</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500" style="left: 47.9%; width: 52.0%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.12.2024</span>
+                                <span>Fin: En cours</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-amber-50 text-amber-700 border-amber-200">En cours</span>
+                        </div>
+                    </div>
+    
+                    <!-- Project plan_continuite_FAB9 -->
+                    <div id="project-row-plan_continuite_FAB9" onclick="openProjectDetails('plan_continuite_FAB9')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="plan de continuité fab9"
+                         data-start="2025-02-01"
+                         data-end="9999-12-31"
+                         data-status="En cours">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">Plan De Continuité FAB9 Catacyto</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500" style="left: 52.1%; width: 47.9%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.02.2025</span>
+                                <span>Fin: En cours</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-amber-50 text-amber-700 border-amber-200">En cours</span>
+                        </div>
+                    </div>
+
+                    <!-- Project plan_continuite -->
+                    <div id="project-row-plan_continuite" onclick="openProjectDetails('plan_continuite')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="plan de continuité phaclin"
+                         data-start="2026-04-01"
+                         data-end="2026-05-01"
+                         data-status="Terminé">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">Plan De Continuité PHACLIN</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500" style="left: 81.2%; width: 2.1%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.04.2026</span>
+                                <span>Fin: 01.05.2026</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">Terminé</span>
+                        </div>
+                    </div>
+    
+                    <!-- Project prescription_pyxis -->
+                    <div id="project-row-prescription_pyxis" onclick="openProjectDetails('prescription_pyxis')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="prescription connectée pyxis-soarian - phad"
+                         data-start="2024-02-01"
+                         data-end="2025-04-02"
+                         data-status="Terminé">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">Prescription connectée Pyxis-Soarian - PHAD</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500" style="left: 33.3%; width: 23.0%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.02.2024</span>
+                                <span>Fin: 02.04.2025</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">Terminé</span>
+                        </div>
+                    </div>
+    
+                    <!-- Project prescription_soarian_maj -->
+                    <div id="project-row-prescription_soarian_maj" onclick="openProjectDetails('prescription_soarian_maj')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="prescription soarian - maj prédéfinis (pha tous)"
+                         data-start="2023-10-01"
+                         data-end="9999-12-31"
+                         data-status="En cours">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">Prescription Soarian - MAJ prédéfinis (PHA tous) </h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500" style="left: 18.7%; width: 81.2%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 01.10.2023</span>
+                                <span>Fin: En cours</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-amber-50 text-amber-700 border-amber-200">En cours</span>
+                        </div>
+                    </div>
+    
+                    <!-- Project refmed_refonte -->
+                    <div id="project-row-refmed_refonte" onclick="openProjectDetails('refmed_refonte')" 
+                         class="project-row grid grid-cols-12 py-4 items-center hover:bg-slate-50 rounded-xl transition-all cursor-pointer group px-2"
+                         data-name="refmed - refonte, évolutions & darwin/sap (pha tous)"
+                         data-start="2023-03-13"
+                         data-end="2025-12-31"
+                         data-status="Terminé">
+                        <div class="col-span-4 pr-4">
+                            <h4 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-xs leading-snug">REFMED - refonte, évolutions & DARWIN/SAP (PHA)</h4>
+                        </div>
+                        <div class="col-span-7 px-4 relative py-2">
+                            <div class="h-3.5 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+                                <div class="absolute top-0 bottom-0 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500" style="left: 4.9%; width: 70.1%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Début: 13.03.2023</span>
+                                <span>Fin: 31.12.2025</span>
+                            </div>
+                        </div>
+                        <div class="col-span-1 text-center">
+                            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">Terminé</span>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAILS CONTAINER (DRAWER / PANEL) -->
+        <div id="details-drawer" class="hidden bg-white border border-slate-100 shadow-xl rounded-2xl p-8 max-w-4xl mx-auto relative transition-all transform duration-300">
+            <!-- Close Button -->
+            <button onclick="closeDetails()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 p-2 hover:bg-slate-100 rounded-full transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Project Meta -->
+            <div class="mb-8">
+                <span id="drawer-statut" class="inline-block px-2.5 py-1 text-xs font-semibold rounded-full bg-indigo-50 text-indigo-700 mb-3">Statut</span>
+                <h3 id="drawer-title" class="text-2xl font-black text-slate-950">Nom du Projet</h3>
+                <p id="drawer-timeline-dates" class="text-sm text-slate-400 mt-1">Date Début - Date Fin</p>
+            </div>
+
+            <!-- Notes libres structurées -->
+            <div id="drawer-notes" class="text-sm text-slate-600 leading-relaxed">
+                <p class="text-slate-400 italic">Aucun détail renseigné.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 3: NOTESES -->
+    <section id="page-notes" class="p-8 md:p-16 max-w-7xl mx-auto w-full border-t border-slate-100">
+        <div class="space-y-2 mb-8">
+            <h2 class="text-3xl font-extrabold text-slate-950">Notes / idées / perspectives</h2>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
+            <div id="perspectives-notes" class="text-sm text-slate-600 leading-relaxed">
+                <p class="text-slate-400 italic">Aucune note renseignée.</p>
+            </div>
+        </div>
+    </section>  
+
+    <!-- FOOTER -->
+    <footer class="mt-auto py-8 text-center text-xs text-slate-400 border-t border-slate-100">
+        <p>Suivi activités PHAD-IT — Greg Baldini</p>
+    </footer>
+
+    <!-- INTERACTIVE LOGIC -->
+    <script>
+        const projectsData = {
+    "chatbot_ia": {
+        "id": "chatbot_ia",
+        "title": "Chatbot IA (GGAL) - (PHAD)",
+        "dates": "Début : 01.03.2024 — Fin : 31.12.2024",
+        "start_date": "2024-03-01",
+        "end_date": "2024-12-31",
+        "statut": "Terminé",
+        "color": "emerald",
+        "left": 29.1,
+        "width": 20.9,
+        "notes": `
+## Résultats
+• Transfert vers MOOVE MEDITRON.
+
+## 2024
+• GBAL : recherche littérature et lectures ; formation aux bases techniques des LLM's ;
+• 04.03.2024 : présentation du projet.
+• 01.05.2024 : Rédaction de questions pour Survex Monkex aux soignants, réalisation & analyse.
+• Contacts avec HES Genève pour travailler avec un étudiant (GGAL).
+• Juillet 2024 : primo rédaction candidature projet GSASA (GGAL) ; relecture et finalisation et envoi (GBAL).
+• Janvier 2024 : Découverte du projet MEDITRON.
+
+Projet clôturé en 2024.`
+    },
+    "codes_indication": {
+        "id": "codes_indication",
+        "title": "Codes Indication - PHAD",
+        "dates": "Début : 17.04.2026 — Fin : En cours",
+        "start_date": "2026-04-17",
+        "end_date": "9999-12-31",
+        "statut": "En cours",
+        "color": "amber",
+        "left": 82.3,
+        "width": 17.7,
+        "notes": `
+## Résultats attendus
+• Import des codes et texte associé via Hospindex.
+• Affichage de ces données sur Refmed & intégrations aux exports xml.
+• Intégration des codes aux prescriptions SOARIAN.
+
+## 2026
+• Discussions en cours GT SIC Pharma - besoin et possibilités SOARIAN
+• Coordination avec CBAR côté Refmed pour import et affichage des données souhaitées dans Refmed.
+• Début de la phase de développement et d'intégration des codes d'indication dans le système PHAD.
+• Discussions avec H externes - demandeurs de ces données - à ajouter à leur export xml.
+• Développement en cours côté TECOST pour l'import & affichage REFMED (affichage prévu dans la partie Limitations de l'affichage en consultation).
+
+## Remarques
+• Points à clarifier : Structure côté prescription ? Besoin de rédiger des résumés courts des textes liés aux codes indication, si oui charge et distribution de ce travail (cf discussions GT SIC, demande d'OPI) et surtout pose la question du suivi et de la maintenance de ces résumés manuels (modification des textes liés, nouveaux codes, etc.).`
+    },
+    "epic_phad": {
+        "id": "epic_phad",
+        "title": "EPIC - PHA",
+        "dates": "Début : 01.11.2025 — Fin : En cours",
+        "start_date": "2025-11-01",
+        "end_date": "9999-12-31",
+        "statut": "En cours",
+        "color": "amber",
+        "left": 70.8,
+        "width": 29.1,
+        "notes": `
+## Résultats attendus
+• Intégration PHA dans le processus.
+• Transfert des données actuelles (prédéfinis, connexion Pyxis etc.).
+• Amélioration des outils.
+• Connaissance des évolutions & formation.
+
+## 2025
+• Début des discussions - GT SIC Pharma.
+
+## 2026
+• Ajouté au groupe de travail EPIC par PVOI comme référent pharmacie. CHUV tour prévu le 27 août.`
+    },
+    "integration_tour": {
+        "id": "integration_tour",
+        "title": "Intégration Hôpital de la Tour - REFMED",
+        "dates": "Début : 01.07.2024 — Fin : 02.01.2025",
+        "start_date": "2024-07-01",
+        "end_date": "2025-01-02",
+        "statut": "Terminé",
+        "color": "emerald",
+        "left": 37.4,
+        "width": 12.7,
+        "notes": `
+## 2024
+• Juillet 2024 : Mise en place de l'accès HLT. 10ème établissement refmed en édition - refmed pas prévu pour ça. Du DEV a dû être réalisé avec SPEC & suivi & validations (VAL & PROD) entre PHA & CBAR & Tecost.
+• Client : plusieurs séances Q&R - plusieurs formations à l'utilisation de refmed.
+• Création de plusieurs accès en édition & phase initiale avec beaucoup de validation d'articles référencés chez eux.
+
+## 2025
+• Finalisation accès et prod en janvier.
+
+Projet clôturé.`
+    },
+    "moove_meditron": {
+        "id": "moove_meditron",
+        "title": "MOOVE-MEDITRON - open source LLM - EPFL CHUV (PHAD)",
+        "dates": "Début : 01.12.2024 — Fin : En cours",
+        "start_date": "2024-12-01",
+        "end_date": "9999-12-31",
+        "statut": "En cours",
+        "color": "amber",
+        "left": 47.9,
+        "width": 52.0,
+        "notes": `
+## 2024
+• Décembre 2024 : Intégration de PHA au projet.
+• Phase 1 : GBAL organisation, communication & formation interne.
+• Rédaction & revue d'un premier batch de questions (PHA).
+
+## 2025
+• Clotûre Phase 1. GBAL participation à l'événnement de clôture.
+• Phase 2, gérée par GGAL : Obligation de reprendre 30 questions (toutes seront des questions de RADIOPHA). Délai fixé au 10 octobre.
+• 9 octobre : GBAL finalisation des questions manquantes.
+• GBAL : lecture et validation du manuscrit (délai fixé au 11.11.2025).
+
+## 2026
+• Clotûre phase 2.
+• En attente de publication, potentiellemnet Nature Medicine.
+• Phase 3 : avec patients volontaires.
+
+## Perspectives / remarques
+• Intérêt concret du projet pour la PHA ? Visibilité de la pharmacie (publication, experitse etc.)
+- Avis personnel : un chatbot dédié à la pharmacie n'apportera pas de plus value et sera moins efficace que les gros modèles.
+- Chatbot HUG = ChatGPT 3.4 avec RAG, sans aucune application présentée`
+    },
+    "plan_continuite": {
+        "id": "plan_continuite",
+        "title": "Plan de Continuité PHACLIN",
+        "dates": "Début : 01.04.2026 — Fin : 01.05.2026",
+        "start_date": "2026-04-01",
+        "end_date": "2026-05-01",
+        "statut": "Terminé",
+        "color": "emerald",
+        "left": 81.2,
+        "width": 2.1,
+        "notes": `
+## Résultats attendus
+• Archivage des fiches FAMI, NINJA & des données médicaments (pages bleues de Refmed).
+
+## 2026
+• Accès DB Oracle SQL dev REFMED. Création d'un outil pour automatiser l'impression des fiches FAMI, fiches NINJA et des fiches médicaments (pages bleues). Archivage sur la plateforme du PDC.`
+    },
+    "plan_continuite_FAB9": {
+        "id": "plan_continuite_FAB9",
+        "title": "Plan de Continuité FAB9 - CATACYTO",
+        "dates": "Début : 01.02.2025 — Fin : En cours",
+        "start_date": "2025-02-01",
+        "end_date": "9999-12-31",
+        "statut": "En cours",
+        "color": "amber",
+        "left": 52.1,
+        "width": 47.9,
+        "notes": `
+## Résultats attendus
+• Une marche à suivre en cas d'interruption des systèmes.
+• Un outil permettant d'envisager le maintien d'une partie de la production.
+• Un mode dégradé totalement papier comme dernière ligne.
+
+## Origines du projet
+• Fin 2024 proposition de GGAL que je prenne le projet.
+• 1ère intuition : installer une version locale et vierge de CATO sur un poste dédié. Idée déjà explorée et impossible selon GGAL & LCAR. Autres pistes à explorer.
+
+## 2025
+• Création d'un GT avec JLEG & LCAR, puis VVRAN & IBEA & EBON.
+• Revue de littérature, thèse d'Isaline Granger sur ce sujet spécifique. Montre l'intérêt d'un tableur Excel pour aider aux validations en cas de crise, voie prise par JLEG.
+• JLEG très autonome sur le fichier Excel, quelle plus value de GBAL ? Décision de pousser l'idée avec un mini logiciel de secours.
+• GBAL rédaction d'un plan de continuité dans lequel intégrer l'outil. Approche nécessaire.
+• Une analyse de risque est effectuée sur le processus de préparation des chimios, rédaction d'un PDC avec un scénario, alogrithmes décisionnels, management de la crise, création de CATACYTO.
+• CATACYTO permet la validation digitale mais aussi la production automatisée de fiches papier pour un mode dégradé de dernière ligne.
+• Des tests de validaiton de CATACTYO sont effectuées avec de vraies prescriptions CATO (en parallèle), aboutissent à des ajustements et validation des fomrules et méthodes.
+
+## 2026
+• Réaliser des productions en mode dégradé, de la prescription à la libération (programmation en cours).
+• Objectif : Validation du PDC et outils ; formation de l'équipe, évaluation de la cadence de production en PDC.
+• Atelier GERPAC avec LCAR & VVRA.
+
+## Remerciements
+• GGAL pour la transmission de ce projet très intéressant.
+• GDTI pour les échanges sur les aspects tehcniques.
+• FAB9 pour les échanges, la collaboration et la carte blanche.
+• IBEA & EBON pour l'aide sur les bases de données.`
+    },
+    "prescription_pyxis": {
+        "id": "prescription_pyxis",
+        "title": "Prescription connectée Pyxis-Soarian - PHAD",
+        "dates": "Début : 01.02.2024 — Fin : 02.04.2025",
+        "start_date": "2024-02-01",
+        "end_date": "2025-04-02",
+        "statut": "Terminé",
+        "color": "emerald",
+        "left": 33.3,
+        "width": 23.0,
+        "notes": `
+## Résultats attendus
+• Transmettre les données médicaments de Soarian à Pyxis.
+• Sécuriser et faciliter la préparation des médicaments.
+• Responsables de la maintenance ?
+
+## 2024 Activités GBAL
+• Actualisation de 200 prédéfinis, identification 300 prédéfinis à nettoyer, maj de toutes les demandes de modif des prédéfinis (hors circuit refmed) après chaque déploiement dans les US.
+• Aide à l'attribution des équivalences dans le serveur Pyxis.
+• Participation aux déploiements dans les US. Présence à la ½ journée + formation donnée aux médecins lors du colloque de chir-thor.
+• Création de tutoriels vidéo sur demande de la DDS à vidéos retirées du site de la pharmacie par DIS9.
+• Rédaction d'un manuscrit sur la mise en place et le suivi du taux de dérogation sur quelques semaines.
+• Préparation de la formation collaborateurs (présentée avec GGAL).
+
+## Déploiement dans les US
+• 01.05.2024 : URGA, URGC, URGO (BH04)
+• 30.06.2024 : MISC (BH17)
+• 09.07.2024 : MIRH (BH17)
+• 12.08.2024 : MIFH (BH17)
+• 17.09.2024 : MEDH-MIGH (BH16)
+• 18.09.2024 : MEDH-MIGH (BH16)
+• 19.09.2024 : MEDH-MIGH (BH16)
+• 30.09.2024 : UROH-DCHH-CPPR (BH14)
+• 04.11.2024 : ORLH. Onco (BH12)
+• 11.11.2024 : CHVH (BH15)
+• 18.11.2024 : PGMH-PGHH-PGTM (CERY)
+• 04.12.2024 : OTBH - MIEH (Av SEPK) (BH14)
+• 05.12.2024 : OTBH - MIEH (Av SEPK) (BH14)
+• 06.12.2024 : OTBH - MIEH (Av SEPK) (BH14)
+• 10.12.2024 : NLGH (BH14)
+• 11.12.2024 : NLGH (BH14)
+• 12.12.2024 : NLGH (BH14)
+• 06.01.2025 : SEPK-SDS (BH12)
+• 07.01.2026 : SEPK-SDS (BH12)
+• 20.01.2026 : PFMH-HPRO-HPRP (CERY)
+• 21.01.2026 : PFMH-HPRO-HPRP (CERY)
+• 22.01.2026 : PFMH-HPRO-HPRP (CERY)
+• 01.04.2025 : MINK (BH19)
+• 02.04.2025 : MINK (BH19)
+
+## 2026
+• Fin de l'implication de PHAD dans les déploiements.
+• SPAL & Beaumot : déploiements compliqués selon APUS.
+
+## Remarques et suite
+• Projet clôturé côté IT mais... suivi et MAJ en routine (ou lors de déploiements) des données Pyxis Serveur (p.ex équivalences) ?
+• Déploiements futurs : absence de task force IT va poser problème.
+• Définition des responsabilités dans ce processus ?`
+    },
+    "prescription_soarian_maj": {
+        "id": "prescription_soarian_maj",
+        "title": "Prescription Soarian - MAJ prédéfinis (PHA tous)",
+        "dates": "Début : 01.10.2023 — Fin : En cours",
+        "start_date": "2023-10-01",
+        "end_date": "9999-12-31",
+        "statut": "En cours",
+        "color": "amber",
+        "left": 18.7,
+        "width": 81.2,
+        "notes": `
+## Activité cross-over PHACLIN & PHAD
+• Activité imputée à la routine Refmed, mais activité transversale (impacte bien plus DIS9 que les autres unités surtout pour Pyxis).
+• Dépasse largement le temps Refmed (demandes, suivi, formation collaborateurs etc.).
+• Nombreuses discussions GT SIC Pharma pour amélioration.`
+    },
+    "refmed_oraclesqldev": {
+        "id": "refmed_oraclesqldev",
+        "title": "Refmed Accès au Oracle SQL DEV",
+        "dates": "Début : 01.02.2026 — Fin : 01.04.2026",
+        "start_date": "2026-02-01",
+        "end_date": "2026-04-01",
+        "statut": "Terminé",
+        "color": "emerald",
+        "left": 77.1,
+        "width": 4.2,
+        "notes": `
+## Contexte
+• Intérêt pour la pharmacie d'avoir un accès direct au serveur Oracle de la DB Refmed, permettant d'effectuer des requêtes SQL.
+• Une demande identique est venue de GDT, avec lequel une séance commune a été organisée avec CBAR & les référents IT pour CEGID.
+
+## Résultats
+• Accès DB Oracle SQL dev REFMED opérationnel (GBAL & GDT).
+• Côté REFMED : a permis de mettre en place des scripts d'exports ciblés (MMP, PM etc.) & a permis d'extraire les données et de créer un outil d'impression de l'ensemble des fiches FAMI, NINJA, Fiches médci.
+• DIS9 : je ne connais pas les use case de l'accès DIS9 à la Db Refmed.
+
+## Remarques
+• ...`
+    },
+    "refmed_refonte": {
+        "id": "refmed_refonte",
+        "title": "REFMED - refonte, évolutions & DARWIN/SAP (PHA)",
+        "dates": "Début : 13.03.2023 — Fin : 31.12.2025",
+        "start_date": "2023-03-13",
+        "end_date": "2025-12-31",
+        "statut": "Terminé",
+        "color": "emerald",
+        "left": 4.9,
+        "width": 70.1,
+        "notes": `
+## Résultats attendus
+• MAJ système pour les outils modernes.
+• Apporter des évolutions (FAMI, compat-Y, extravasation, données facturation).
+• Alimenter SAP avec les données de facturation selon les nouvelles spécifications.
+
+## 2023
+• Reprise du projet (CDC n'était pas validé) - SPEC pas précises, non validées par les deux parties. Toutes les nouveautés à revoir.
+
+## 2024
+• Sprint tests (en VAL et en PROD) - avec retours, correctifs, test bis.
+• New Spec modules FAMI groupées + compat Y + Extravasation.
+
+## 2025
+• Tests nouveaux modules
+• Validation nouveaux modules (> 200 tickets JIRA traités)
+• Migration SAP (n'était pas prévu dans mon CDC)
+• Multiples séances avec questions sur facturation ambulatoire & données refmed
+• Traitement de centaines de lignes d'erreurs à modifier manuellement dans Refmed (charge de 4 jours)
+• Mise en place d'un script mensuel d'analyse des erreurs pour diluer le travail, actif
+• Clôture
+
+## 2026
+• Projet extravasations avec PHAClin - en cours
+• Projet COMPAT Y avec PHAClin - en cours
+• Regroupement fiches FAMI (réduction de > 200 fiches) - en cours`
+    }
+};
+
+        function renderNotes(text) {
+            if (!text || !text.trim()) return '<p class="text-slate-400 italic">Aucun détail renseigné.</p>';
+            const lines = text.split('\n');
+            let html = '';
+            let inList = false;
+            for (let line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.startsWith('## ')) {
+                    if (inList) { html += '</ul>'; inList = false; }
+                    html += `<h4 class="text-sm font-bold text-slate-800 mt-5 mb-2 pb-1 border-b border-slate-100 uppercase tracking-wide">${trimmed.slice(3)}</h4>`;
+                } else if (trimmed.startsWith('# ')) {
+                    if (inList) { html += '</ul>'; inList = false; }
+                    html += `<h3 class="text-base font-black text-slate-900 mt-6 mb-2">${trimmed.slice(2)}</h3>`;
+                } else if (trimmed.startsWith('• ') || trimmed.startsWith('- ')) {
+                    if (!inList) { html += '<ul class="space-y-1.5 mb-3 list-none pl-0">'; inList = true; }
+                    html += `<li class="flex gap-2 items-start"><span class="text-indigo-400 shrink-0">•</span><span>${trimmed.slice(2)}</span></li>`;
+                } else if (trimmed === '') {
+                    if (inList) { html += '</ul>'; inList = false; }
+                    html += '<div class="h-1"></div>';
+                } else {
+                    if (inList) { html += '</ul>'; inList = false; }
+                    html += `<p class="mb-2 text-slate-500 italic">${trimmed}</p>`;
+                }
+            }
+            if (inList) html += '</ul>';
+            return html;
+        }
+
+        function sortProjects(criteria, buttonEl) {
+            const container = document.getElementById('projects-container');
+            const rows = Array.from(container.getElementsByClassName('project-row'));
+
+            // Highlight active button
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+                btn.classList.add('bg-white', 'text-slate-700', 'border-slate-200', 'hover:bg-indigo-50');
+            });
+            if (buttonEl) {
+                buttonEl.classList.remove('bg-white', 'text-slate-700', 'border-slate-200', 'hover:bg-indigo-50');
+                buttonEl.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+            }
+
+            rows.sort((a, b) => {
+                let valA = a.getAttribute(`data-${criteria}`);
+                let valB = b.getAttribute(`data-${criteria}`);
+
+                if (criteria === 'start' || criteria === 'end') {
+                    // Turn date strings into times for ordering
+                    const dateA = new Date(valA);
+                    const dateB = new Date(valB);
+                    return dateA - dateB;
+                } else {
+                    // Alphabetic sort
+                    return valA.localeCompare(valB);
+                }
+            });
+
+            // Append in new order
+            rows.forEach(row => container.appendChild(row));
+        }
+
+        function openProjectDetails(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
+
+            const drawer = document.getElementById('details-drawer');
+            const clickedRow = document.getElementById('project-row-' + projectId);
+
+            // Toggle: if already open for this project, close it
+            if (!drawer.classList.contains('hidden') && drawer.dataset.openProject === projectId) {
+                closeDetails();
+                return;
+            }
+
+            document.getElementById('drawer-title').textContent = project.title;
+            document.getElementById('drawer-timeline-dates').textContent = project.dates;
+            
+            const statutEl = document.getElementById('drawer-statut');
+            statutEl.textContent = project.statut;
+            if (project.statut === "Terminé") {
+                statutEl.className = "inline-block px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-700 mb-3 border border-emerald-200";
+            } else {
+                statutEl.className = "inline-block px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-50 text-amber-700 mb-3 border border-amber-200";
+            }
+
+            // Render notes
+            document.getElementById('drawer-notes').innerHTML = renderNotes(project.notes);
+
+            // Move drawer right after the clicked row and show it
+            clickedRow.insertAdjacentElement('afterend', drawer);
+            drawer.dataset.openProject = projectId;
+            drawer.classList.remove('hidden');
+            drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function closeDetails() {
+            const drawer = document.getElementById('details-drawer');
+            drawer.classList.add('hidden');
+            delete drawer.dataset.openProject;
+        }
+
+        const notesData = {
+            "notes": `
+## CAZACYTO :
+- Prévoir un 10% à partir de septembre 2026 pour les tests prod & préparation Gerpac.
+
+## Refmed-DIS9 : Gestion des demandes de renvois et alternatives
+• Les demandes d'alternatives refmed (demandées par mail par DIS9) représentent une part importante de l'activité de la boîte Refmed, pour quelle valeur ajoutée ? Les PHA rédigent un mail aussi long à écrire que l'action dans refmed.
+• Idée de projet en collab avec DIS9 : créer un simple outil basé sur un export Refmed, avec script pour créer des groupes de médicaments (meme ATC, forme, PA, dosage...) avec validation et modif humaine possible, et croisement avec la fonction stock (oui/non) basée sur le pharmacode. Derrière un script détermine l'article effectivement stocké, et applique l'alternative à tous les autres articles du groupe.
+
+## Pyxis
+- J'ai reçu beaucoup de questions suite aux déploiement en SPAH & MITH. APUS perdue face aux demandes, PhCliniciens (LMAR) qui produit des listes de dotation de l'armoire pour donner aux médecins etc. 
+- Passage d'un modèle de déploiement avec PHA-IT & IT & DIS9 avec résolution immédiate des pbm à APUS seule.
+- Bcp de médicaments stockés non reliés à la prescription (doivent déroger), comment améliorer ces déploiements ? Analyse en amont de : dotation & équivalences dans le serveur & prédéfinis ?
+
+## Evolution des normes vers FHIR
+- Suivre le déploiement prochainement des bases de données médicaments et médicales aux normes FHIR CH EMED (voir https://www.ech.ch/fr/ech/ech-0268/1.0.0)`
+        };
+
+        // Default sort on load (by start date)
+        window.addEventListener('DOMContentLoaded', () => {
+            sortProjects('start', document.getElementById('default-sort-btn'));
+            document.getElementById('perspectives-notes').innerHTML = renderNotes(notesData.notes);
+        });
+    </script>
+</body>
+</html>
